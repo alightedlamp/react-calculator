@@ -1,3 +1,7 @@
+$control-color: red;
+$num-color: #9ea6b2;
+$operator-color: black;
+
 * {
   box-sizing: border-box;
 }
@@ -16,10 +20,11 @@ h1 {
 .CalculatorPanel {
   margin: 3em auto 2em auto;
   background-color: #454d59;
+  box-shadow: 5px 5px 0 #2a323f;
   width: 400px;
 }
 .header {
-  padding: 7px 15px;
+  padding: 10px 15px;
   color: white;
   background-color: black;
 }
@@ -31,43 +36,44 @@ h1 {
   background-color: #9ea6b2;
   height: 100px;
   display: flex;
+  font-size: 3em;
+  text-align: right;
   // padding: 15px;
 }
 .result {
   width: 100%;
+  padding: 20px;
   background-color: #d5dfef;
 }
-.nums {
-  align-items: flex-start;
-  display: inline-flex;
+.buttons {
+  display: flex;
   flex-wrap: wrap;
 }
-.nums,
-.controls,
-.operations {
-  display: inline-flex;
-}
-.nums,
-.controls {
-  width: 300px;
-  justify-content: flex-start;
-}
-.operations {
+.button {
   width: 100px;
-  flex-direction: column;
-  justify-content: flex-end;
+  height: 100px;
+  padding: 20px;
+
+  text-align: center;
+  vertical-align: middle;
+
+  cursor: pointer;
 }
-.nums .button {
-  background-color: #9ea6b2;
+.button.num {
+  background-color: $num-color;
   color: white;
 }
-.controls .button {
-  background-color: red;
+.button.num.wide {
+  width: 200px;
+}
+.button.control {
+  background-color: $control-color;
   color: white;
 }
-.operations .button {
-  background-color: black;
+.button.operator {
+  background-color: $operator-color;
   color: white;
+
 }
 .button {
   width: 100px;
