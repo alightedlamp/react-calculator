@@ -13,12 +13,12 @@ class App extends Component {
 
     this.state = {
       operator: '',
-      currentNum: '',
+      currentNum: '0',
       lastNum: '',
       final: false
     }
   }
-  // Sends action to the appropraite function based on button choice
+  // Sends action to the appropraite function based on button type
   routeAction = (action) => {
     if (types.nums.indexOf(action) > -1) {
       this.setCurrentNum(action);
@@ -44,8 +44,8 @@ class App extends Component {
   // Sets current operator choice in state
   setOperator = (operator) => {
     let num = this.state.currentNum;
-    // If the current number is 0, we're just getting started
-    if (num !== '') {
+    // If current number isn't zero, and an operator is chosen
+    if (num !== '0') {
       this.setState({
         currentNum: '0',
         lastNum: num
@@ -65,7 +65,7 @@ class App extends Component {
       case 'C': // Clear
         this.setState({
           operator: '',
-          currentNum: '',
+          currentNum: '0',
           lastNum: '',
           final: false
         });
@@ -103,7 +103,7 @@ class App extends Component {
       case 'x':
         result = multiply(x, y);
         break;
-      case '/':
+      case '÷':
         result = divide(x, y);
         break;
       default:

@@ -67,6 +67,9 @@ h1 {
   background-color: black;
   color: white; }
 
+.button:hover {
+  transition: .25s; }
+
 .button.num:hover {
   background-color: #828c9b; }
 

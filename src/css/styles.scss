@@ -74,6 +74,9 @@ h1 {
   background-color: $operator-color;
   color: white;
 }
+.button:hover {
+  transition: .25s;
+}
 .button.num:hover {
   background-color: darken($num-color, 10%);
 }
