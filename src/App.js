@@ -14,16 +14,12 @@ class App extends Component {
     this.state = {
       operator: '',
       currentNum: '',
-      lastNum: ''
+      lastNum: '',
+      final: false
     }
-
-    this.routeAction = this.routeAction.bind(this);
-    this.setCurrentNum = this.setCurrentNum.bind(this);
-    this.setOperator = this.setOperator.bind(this);
-    this.executeAction = this.executeAction.bind(this);
-    this.computeResult = this.computeResult.bind(this);
   }
-  routeAction(action) {
+  // Sends action to the appropraite function based on button choice
+  routeAction = (action) => {
     if (types.nums.indexOf(action) > -1) {
       this.setCurrentNum(action);
     }
@@ -34,7 +30,8 @@ class App extends Component {
       this.executeAction(action);
     }
   }
-  setCurrentNum(num) {
+  // Sets current number in state
+  setCurrentNum = (num) => {
     let next = '';
     if (this.state.currentNum === '0') {
       next = num;
@@ -44,43 +41,51 @@ class App extends Component {
     }
     this.setState({ currentNum: next });
   }
-  setOperator(operator) {
+  // Sets current operator choice in state
+  setOperator = (operator) => {
     let num = this.state.currentNum;
+    // If the current number is 0, we're just getting started
     if (num !== '') {
       this.setState({
         currentNum: '0',
         lastNum: num
       });
     }
+    // If an operator has already been chosen and it isn't the final choice, compute result then move on
+    if (this.state.operator && !this.state.final) {
+      this.computeResult();
+    }
     this.setState({ operator });
   }
-  executeAction(action) {
-    console.log("executing: " + action);
+  // Executes an action on the currentNumber or routes to the final answer
+  executeAction = (action) => {
     let num = '';
 
     switch (action) {
-      case 'C':
+      case 'C': // Clear
         this.setState({
           operator: '',
           currentNum: '',
-          operator: '',
+          lastNum: '',
+          final: false
         });
         break;
-      case '+/-':
+      case '+/-': // Swap sign
         num = String(Number(this.state.currentNum) * -1);
         this.setState({ currentNum: num });
         break;
-      case '%':
+      case '%': // Percentage
         num = String(Number(this.state.currentNum) / 100);
         this.setState({ currentNum: num });
         break;
-      case '=':
+      case '=': // Compute result
+        this.setState({ final: true });
         this.computeResult();
         break;
     }
   }
-  computeResult() {
-    console.log('computing');
+  // Computes result based on two numbers and chosen operator
+  computeResult = () => {
     let x = parseFloat(this.state.lastNum);
     let y = parseFloat(this.state.currentNum);
 
@@ -103,19 +108,19 @@ class App extends Component {
 
     result = String(result);
     this.setState({
-      lastNum: result,
-      currentNum: result
+      lastNum: result
      });
   }
   render() {
     return (
       <div className="CalculatorPanel">
         <Header />
-        <Display currentNum={this.state.currentNum} result={this.state.result} />
+        <Display lastNum={this.state.lastNum} currentNum={this.state.currentNum} final={this.state.final} />
         <div className="buttons">
           {buttons.map((button, i) => {
             let text = buttons[i][Object.keys(button)];
             let action = Object.keys(button);
+
             return <Button routeAction={this.routeAction} text={text} action={action} key={action}/>
           })}
         </div>

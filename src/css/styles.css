@@ -67,6 +67,15 @@ h1 {
   background-color: black;
   color: white; }
 
+.button.num:hover {
+  background-color: #828c9b; }
+
+.button.control:hover {
+  background-color: #cc0000; }
+
+.button.operator:hover {
+  background-color: #1a1a1a; }
+
 .button {
   width: 100px;
   height: 100px;

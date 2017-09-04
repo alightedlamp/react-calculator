@@ -73,7 +73,15 @@ h1 {
 .button.operator {
   background-color: $operator-color;
   color: white;
-
+}
+.button.num:hover {
+  background-color: darken($num-color, 10%);
+}
+.button.control:hover {
+  background-color: darken($control-color, 10%);
+}
+.button.operator:hover {
+  background-color: lighten($operator-color, 10%);
 }
 .button {
   width: 100px;
