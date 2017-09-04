@@ -5,7 +5,6 @@ import { types } from '../helpers';
 class Button extends React.Component {
   render() {
     const text = this.props.text;
-    const action = this.props.action;
     const routeAction = this.props.routeAction;
 
     // Sets button's class based on button category

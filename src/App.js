@@ -82,6 +82,8 @@ class App extends Component {
         this.setState({ final: true });
         this.computeResult();
         break;
+      default:
+        console.log('Invalid action');
     }
   }
   // Computes result based on two numbers and chosen operator
@@ -104,6 +106,8 @@ class App extends Component {
       case '/':
         result = divide(x, y);
         break;
+      default:
+        console.log('Invalid operation');
     }
 
     result = String(result);
@@ -117,12 +121,7 @@ class App extends Component {
         <Header />
         <Display lastNum={this.state.lastNum} currentNum={this.state.currentNum} final={this.state.final} />
         <div className="buttons">
-          {buttons.map((button, i) => {
-            let text = buttons[i][Object.keys(button)];
-            let action = Object.keys(button);
-
-            return <Button routeAction={this.routeAction} text={text} action={action} key={action}/>
-          })}
+          {buttons.map((button, i) => <Button routeAction={this.routeAction} text={button} key={`button-${i}`}/>)}
         </div>
       </div>
     );
